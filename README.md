@@ -68,7 +68,7 @@ Copier le script dans le projet:
 ```bash
 vim flatten-openalex-parquet.py
 ```
-Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec échapp, :wq, enter.
+Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec :wq, enter.
 
 ### 3.2 Préparer la tâche
 Il faut ensuite soumettre la tâche à la grappe Nibi, ce qu'on peut faire avec la commande sbatch et le  [script Slurm](tache_conversion.sh) .

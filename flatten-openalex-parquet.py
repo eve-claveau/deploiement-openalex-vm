@@ -78,7 +78,7 @@ import pyarrow.parquet as pq
 # Configuration
 # ---------------------------------------------------------------------------
 
-SNAPSHOT_DIR = os.environ.get('SNAPSHOT_DIR', 'openalex-snapshot')
+SNAPSHOT_DIR = os.environ.get('SNAPSHOT_DIR', 'openalex_snapshot')
 PARQUET_DIR  = os.environ.get('PARQUET_DIR',  'parquet-files')
 
 # Set to a positive integer to process only that many partition files per

@@ -10,7 +10,7 @@ Demande de 5 To d'espace de projet permanent via le Service d'accès rapide de l
 
 Lien: [https://docs.alliancecan.ca/wiki/Rapid_Access_Service/fr]
 
-## 2. Téléchargement des données comprimées
+## 2. Connection à Nibi et installation de paquets python
 Dans le terminal, se connecter dans l'environnement Nibi à l'aide de ssh:
 ```bash
 ssh nom_utilisateur_ccdb@computecanada.ca
@@ -33,17 +33,21 @@ Ouvrir une session virtuelle, pour garantir le téléchargement sans interruptio
 ```bash
 tmux
 ```
-Installer l'outil de aws dans un environnement virtuel:
+Installer l'outil de aws, le module "Arrow" et le paquet DuckDB dans un environnement virtuel:
+```bash
+module load gcc arrow
+```
 ```bash
 module load python/3.11.5
 ```
 ```bash
-virtualenv aws_env
-source aws_env/bin/activate
+virtualenv data_env
+source data_env/bin/activate
 ```
 ```bash
-pip install awscli
+pip install awscli pyarrow duckdb
 ```
+## 3. Téléchargement des données comprimées
 Vérifier la taille du snapshot (seulement la section données, sans "legacy-data") :
 ``` {bash}
 aws s3 ls --summarize --human-readable --no-sign-request --recursive "s3://openalex/data"
@@ -59,6 +63,10 @@ Les fichiers doivent ensuite être transformés à partir du format JSON au form
 L'approche standard avec .csv utilise le script Python (flatten-openalex-jsonl.py) , duquel on peut conserver la structure relationnelle.
 
 Lien: [https://github.com/ourresearch/openalex-documentation-scripts]
+
+Le nouveau script Python (flatten-openalex-parquet.py) a été créer à l'aide de Claude AI. 
+Il est nécessare d'installer la librairie pyarrow 
+
 
 Exemple de transformation DuckDB, pour transformer en parquet :
 

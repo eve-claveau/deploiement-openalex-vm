@@ -58,13 +58,10 @@ aws s3 sync "s3://openalex/data" "data" --no-sign-request
 ```
 Lien: [https://developers.openalex.org/download/download-to-machine]
 
-## 3. Transformation vers Parquet
+## 3. Décompression et transformation vers .parquet
 Les fichiers doivent ensuite être transformés à partir du format JSON au format parquet (stockage de données en colonnes, qui permet d'utiliser DuckDB pour l'analyse SQL).
-L'approche standard avec .csv utilise le script Python (flatten-openalex-jsonl.py) , duquel on peut conserver la structure relationnelle.
 
-Lien: [https://github.com/ourresearch/openalex-documentation-scripts]
-
-Le nouveau script Python (flatten-openalex-parquet.py) a été créer à l'aide de Claude AI. 
+Le script Python [flatten-openalex-parquet.py](flatten-openalex-parquet.py)  a été créé à l'aide de Claude AI et utilise la structure relationelle de [https://github.com/ourresearch/openalex-documentation-scripts] (qui transforme en .csv) . 
 
 Copier le script dans le projet: 
 ```bash
@@ -72,5 +69,5 @@ vim flatten-openalex-parquet.py
 ```
 Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec échapp, :wq, enter.
 
-
+Il faut ensuite 
 

@@ -65,16 +65,12 @@ L'approche standard avec .csv utilise le script Python (flatten-openalex-jsonl.p
 Lien: [https://github.com/ourresearch/openalex-documentation-scripts]
 
 Le nouveau script Python (flatten-openalex-parquet.py) a été créer à l'aide de Claude AI. 
-Il est nécessare d'installer la librairie pyarrow 
 
-
-Exemple de transformation DuckDB, pour transformer en parquet :
-
-``` SQL
-COPY (
-    SELECT * FROM read_json_auto('openalex-snapshot/data/works/*/*.gz')
-) TO 'works.parquet' (FORMAT PARQUET);
+Copier le script dans le projet: 
+```bash
+vim flatten-openalex-parquet.py
 ```
+Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec échapp, :wq, enter.
 
 
 

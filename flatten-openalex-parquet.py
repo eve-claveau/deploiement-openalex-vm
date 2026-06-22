@@ -635,14 +635,14 @@ def flatten_concepts():
                         'mag':        ids.get('mag'),
                     })
 
-                for ancestor in concept.get('ancestors', []):
+                for ancestor in (concept.get('ancestors') or []):
                     if ancestor_id := ancestor.get('id'):
                         bufs['concepts_ancestors'].write({
                             'concept_id':  concept_id,
                             'ancestor_id': ancestor_id,
                         })
 
-                for row in concept.get('counts_by_year', []):
+                for row in (concept.get('counts_by_year') or []):
                     bufs['concepts_counts_by_year'].write({
                         'concept_id':    concept_id,
                         'year':          row.get('year'),
@@ -651,7 +651,7 @@ def flatten_concepts():
                         'oa_works_count':row.get('oa_works_count'),
                     })
 
-                for related in concept.get('related_concepts', []):
+                for related in (concept.get('related_concepts') or []):
                     if related_id := related.get('id'):
                         bufs['concepts_related_concepts'].write({
                             'concept_id':         concept_id,

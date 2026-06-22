@@ -61,6 +61,7 @@ Lien: [https://developers.openalex.org/download/download-to-machine]
 ## 3. Décompression et transformation vers .parquet
 Les fichiers doivent ensuite être transformés à partir du format JSON au format parquet (stockage de données en colonnes, qui permet d'utiliser DuckDB pour l'analyse SQL).
 
+### 3.1 Préparer le script
 Le script Python [flatten-openalex-parquet.py](flatten-openalex-parquet.py)  a été créé à l'aide de Claude AI et utilise la structure relationelle de [https://github.com/ourresearch/openalex-documentation-scripts] (qui transforme en .csv) . 
 
 Copier le script dans le projet: 
@@ -69,5 +70,17 @@ vim flatten-openalex-parquet.py
 ```
 Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec échapp, :wq, enter.
 
-Il faut ensuite 
+### 3.2 Préparer la tâche
+Il faut ensuite soumettre la tâche à la grappe Nibi, ce qu'on peut faire avec la commande sbatch et le  [script Slurm](tache_conversion.sh) .
+
+Pour plus d'information sur sbatch: [https://docs.alliancecan.ca/wiki/Running_jobs/fr]
+
+Commencer par copier le script Slurm dans le projet de la même façon qu'avec le script Python.
+
+Ensuite, soumettre la tâche:
+```bash
+sbatch tache_conversion.sh
+```
+
+
 

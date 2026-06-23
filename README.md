@@ -83,6 +83,10 @@ Ensuite, soumettre la tâche:
 ```bash
 sbatch tache_conversion.sh
 ```
+## 4. Configuration de Open On Demand
+
+## 5. Mise à jour du snapshot
+
 
 
 

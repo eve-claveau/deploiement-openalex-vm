@@ -58,10 +58,10 @@ aws s3 sync "s3://openalex/data" "data" --no-sign-request
 ```
 Lien: [https://developers.openalex.org/download/download-to-machine]
 
-## 3. Décompression et transformation vers .parquet
+## 4. Décompression et transformation vers .parquet
 Les fichiers doivent ensuite être transformés à partir du format JSON au format parquet (stockage de données en colonnes, qui permet d'utiliser DuckDB pour l'analyse SQL).
 
-### 3.1 Préparer le script
+### 4.1 Préparer le script
 Le script Python [flatten-openalex-parquet.py](flatten-openalex-parquet.py)  a été créé à l'aide de Claude AI.
 
 Il utilise la même structure relationelle que le script développé par OpenAlex [https://github.com/ourresearch/openalex-documentation-scripts] (qui transforme en .csv) . 
@@ -72,8 +72,8 @@ vim flatten-openalex-parquet.py
 ```
 Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec :wq, enter.
 
-### 3.2 Préparer la tâche
-Il faut ensuite soumettre la tâche à la grappe Nibi, ce qu'on peut faire avec la commande sbatch et le  script Slurm [tache_conversion.sh](tache_conversion.sh) .
+### 4.2 Préparer la tâche
+Il faut ensuite soumettre la tâche à la grappe Nibi, ce qu'on peut faire avec la commande sbatch et le script Slurm [tache_conversion.sh](tache_conversion.sh) .
 
 Pour plus d'information sur sbatch: [https://docs.alliancecan.ca/wiki/Running_jobs/fr]
 
@@ -83,9 +83,12 @@ Ensuite, soumettre la tâche:
 ```bash
 sbatch tache_conversion.sh
 ```
-## 4. Configuration de Open On Demand
+## 5. Installation de DuckDB
+et de dplyr sur R studio
 
-## 5. Mise à jour du snapshot
++ pip install duckdb (pour python)
+
+## 6. Mise à jour du snapshot
 
 
 

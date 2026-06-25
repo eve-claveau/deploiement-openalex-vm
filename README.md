@@ -72,6 +72,8 @@ vim flatten-openalex-parquet.py
 ```
 Copier-coller le script au complet dans la fenêtre vim du terminal, puis enregistrer avec :wq, enter.
 
+En travaillant avec DuckDB au lieu de PostgreSQL, ...
+
 ### 4.2 Préparer la tâche
 Il faut ensuite soumettre la tâche à la grappe Nibi, ce qu'on peut faire avec la commande sbatch et le script Slurm [tache_conversion.sh](tache_conversion.sh) .
 
@@ -83,10 +85,29 @@ Ensuite, soumettre la tâche:
 ```bash
 sbatch tache_conversion.sh
 ```
-## 5. Installation de DuckDB
+## 5. Préparation de l'environnement R
+Pour travailler en R avec DuckDB, se connecter à JupyterLab à travers [Open On Demand](https://ondemand.sharcnet.ca/pun/sys/dashboard).
+
+À partir du launcher, démarrer une session R Studio, puis installer les paquets nécécessaires:
+```{R}
+install.packages("duckdb")
+install.packages("dbplyr")
+install.packages("dplyr")
+```
+
+## 6. Préparation de l'environnement Python
+Pour travailler avec DuckDB en Python, depuis une session Jupyter Lab, dans le terminal:
+```bash
+module load python
+module load scipy-stack/2026a
+```
+Puis créer un environnement virtuel depuis lequel duckdb peut être installé:
+```bash
+
 et de dplyr sur R studio
 
 + pip install duckdb (pour python)
+
 
 ## 6. Mise à jour du snapshot
 

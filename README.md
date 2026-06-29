@@ -96,7 +96,10 @@ install.packages("dplyr")
 ```
 
 ## 6. Préparation de l'environnement Python
-Pour travailler avec DuckDB en Python, depuis une session Jupyter Lab, dans le terminal:
+Pour travailler en Python, il faut dabord configurer DuckDB et pandas pour les Jupyter Notebooks. 
+
+
+Depuis une session Jupyter Lab, dans le terminal:
 ```bash
 module load python
 module load scipy-stack/2026a
@@ -104,6 +107,8 @@ module load scipy-stack/2026a
 Réouvrir l'environnement virtuel depuis lequel duckdb peut être installé:
 ```bash
 source /project/def-nom_du_groupe/openalex_snapshot/data_env/bin/activate
+```
+```bash
 pip install duckdb ipykernel
 ```
 Et connecter l'environnement directement au menu Jupyter sur le web.

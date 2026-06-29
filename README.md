@@ -103,13 +103,25 @@ module load scipy-stack/2026a
 ```
 Puis créer un environnement virtuel depuis lequel duckdb peut être installé:
 ```bash
+virtualenv /project/def-nom_du_groupe/openalex_snapshot/data_env
+```
+```bash
+source /project/def-nom_du_groupe/openalex_snapshot/data_env/bin/activate
+pip install duckdb ipykernel
+```
+Et connecter l'environnement directement au menu Jupyter sur le web.
+```bash
+python -m ipykernel install --user --name=data_env --display-name="OpenAlex (data_env)"
+```
+Maintenant dans la section Notebook du launcher dans JupyterLab, il devrait y avoir une tuile OpenAlex (data_env). 
 
-et de dplyr sur R studio
+Les Jupyter Notebook créés avec cette tuile auront accès au module DuckDB, en utilisant:
+```python
+import duckdb
+```
 
-+ pip install duckdb (pour python)
 
-
-## 6. Mise à jour du snapshot
+## 7. Mise à jour du snapshot
 
 
 

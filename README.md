@@ -33,7 +33,7 @@ Ouvrir une session virtuelle, pour garantir le téléchargement sans interruptio
 ```bash
 tmux
 ```
-Installer l'outil de aws, le module "Arrow" et le paquet DuckDB dans un environnement virtuel:
+Installer l'outil de aws et le module "Arrow" dans un environnement virtuel:
 ```bash
 module load gcc arrow
 ```
@@ -45,7 +45,7 @@ virtualenv data_env
 source data_env/bin/activate
 ```
 ```bash
-pip install awscli pyarrow duckdb
+pip install awscli pyarrow
 ```
 ## 3. Téléchargement des données comprimées
 Vérifier la taille du snapshot (seulement la section données, sans "legacy-data") :
@@ -101,10 +101,7 @@ Pour travailler avec DuckDB en Python, depuis une session Jupyter Lab, dans le t
 module load python
 module load scipy-stack/2026a
 ```
-Puis créer un environnement virtuel depuis lequel duckdb peut être installé:
-```bash
-virtualenv /project/def-nom_du_groupe/openalex_snapshot/data_env
-```
+Réouvrir l'environnement virtuel depuis lequel duckdb peut être installé:
 ```bash
 source /project/def-nom_du_groupe/openalex_snapshot/data_env/bin/activate
 pip install duckdb ipykernel
@@ -119,7 +116,6 @@ Les Jupyter Notebook créés avec cette tuile auront accès au module DuckDB, en
 ```python
 import duckdb
 ```
-
 
 ## 7. Mise à jour du snapshot
 

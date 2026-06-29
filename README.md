@@ -121,6 +121,10 @@ Les Jupyter Notebook créés avec cette tuile auront accès au module DuckDB, en
 ```python
 import duckdb
 ```
+Il est aussi possible de rouler des fichiers python à partir du terminal, en spécifiant l'environnement:
+```bash
+/project/def-nom_du_groupe/openalex_snapshot/data_env/bin/python script.py
+``
 
 ## 7. Mise à jour du snapshot
 

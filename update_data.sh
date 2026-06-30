@@ -1,5 +1,11 @@
 #!/bin/bash
+# SBATCH --job-name=openalex_update
+# SBATCH --core-per-task=4
+# SBATCH --mem=32G
+# SBATCH --time=24:00:00
+# SBATCH --output=update_data_%j.out
 
+module load gcc arrow
 
 # Download du dernier snapshot OpenAlex 
 aws s3 sync "s3://openalex/data/" "/project/def-yacineb/openalex_snapshot/data/" --delete

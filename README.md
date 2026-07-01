@@ -124,7 +124,47 @@ import duckdb
 Il est aussi possible de rouler des fichiers python à partir du terminal, en spécifiant l'environnement:
 ```bash
 /project/def-nom_du_groupe/openalex_snapshot/data_env/bin/python script.py
-``
+```
+## Example d'utilisation de DuckDB comme une requête avec l'API et le wrapper OpenAlex R
+Le code pour trouver tous les collaborateurs d'un chercheur spécifique, à travers le package [OpenAlex R](https://github.com/ropensci/openalexR):
+```R
+install.packages("openalexR")
+library(openalexR)
+library(dplyr)
+library(tidyr)
+
+# script OpenAlex R (avec api) pour trouver tous les collaborateurs de recherche 
+# et le nombre de publications communes
+auteur <- oa_fetch(
+  entity = "authors",
+  search = "Prénom Nom"
+)
+auteur %>% select(nom = display_name, id)
+
+id_auteur <- "A5070708267"
+
+travaux_communs <- oa_fetch(
+  entity = "works",
+  author.id = id_auteur,
+  verbose = FALSE 
+)
+
+collaborateurs <- travaux_communs %>%
+  select(authorships) %>%
+  
+  # la liste d'auteurs séparés
+  unnest(authorships) %>%
+  
+  filter(id != paste0("https://openalex.org/", id_auteur)) %>%
+  
+  # ajouter un compteur du nombre de papiers
+  count(display_name, name = "nombre_de_papiers") %>% 
+  
+  arrange(desc(nombre_de_papiers), display_name) 
+
+print(n = 200, collaborateurs)
+
+```
 
 ## 7. Mise à jour du snapshot
 

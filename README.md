@@ -125,23 +125,15 @@ Il est aussi possible de rouler des fichiers python à partir du terminal, en sp
 ```bash
 /project/def-nom_du_groupe/openalex_snapshot/data_env/bin/python script.py
 ```
-## Example d'utilisation de DuckDB comme une requête avec l'API et le wrapper OpenAlex R
-Le code pour trouver tous les collaborateurs d'un chercheur spécifique, à travers le package [OpenAlex R](https://github.com/ropensci/openalexR):
+## Example d'une requête locale vs avec l'API
+Le script pour trouver tous les collaborateurs d'un chercheur spécifique et le nombre de collaborations communes, à travers le package [OpenAlex R](https://github.com/ropensci/openalexR):
 ```R
 install.packages("openalexR")
 library(openalexR)
 library(dplyr)
 library(tidyr)
 
-# script OpenAlex R (avec api) pour trouver tous les collaborateurs de recherche 
-# et le nombre de publications communes
-auteur <- oa_fetch(
-  entity = "authors",
-  search = "Prénom Nom"
-)
-auteur %>% select(nom = display_name, id)
-
-id_auteur <- "A5070708267"
+id_auteur <- "..."
 
 travaux_communs <- oa_fetch(
   entity = "works",
@@ -157,13 +149,47 @@ collaborateurs <- travaux_communs %>%
   
   filter(id != paste0("https://openalex.org/", id_auteur)) %>%
   
-  # ajouter un compteur du nombre de papiers
   count(display_name, name = "nombre_de_papiers") %>% 
   
   arrange(desc(nombre_de_papiers), display_name) 
 
 print(n = 200, collaborateurs)
 
+```
+Le code équivalent avec la base de données locale et DuckDB:
+```R
+library(duckdb)
+library(DBI)
+library(dplyr)
+library(dbplyr)
+con <- dbConnect(duckdb::duckdb())
+
+dbGetQuery(con, "
+WITH target_works AS (
+  SELECT work_id
+  FROM read_parquet('parquet-files/works_authorships.parquet') 
+  WHERE author_id = 'https://openalex.org/...'
+),
+
+collaborations AS (
+  SELECT 
+    author_id, 
+    work_id
+  FROM read_parquet('parquet-files/works_authorships.parquet') 
+  WHERE work_id IN (SELECT work_id FROM target_works)
+    AND author_id != 'https://openalex.org/...'
+)
+
+SELECT 
+  a.display_name AS collaborateur,
+  COUNT(DISTINCT w.title) AS nombre_de_papiers,
+FROM collaborations c
+JOIN read_parquet('parquet-files/authors.parquet') a
+  ON c.author_id = a.id
+JOIN read_parquet('parquet-files/works.parquet') w
+  ON c.work_id = w.id
+GROUP BY a.display_name
+ORDER BY nombre_de_papiers DESC, collaborateur ASC;" )
 ```
 
 ## 7. Mise à jour du snapshot

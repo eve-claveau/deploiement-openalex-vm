@@ -191,6 +191,12 @@ JOIN read_parquet('parquet-files/works.parquet') w
 GROUP BY a.display_name
 ORDER BY nombre_de_papiers DESC, collaborateur ASC;" )
 ```
+11 minutes
+## Test sur un grand réseau de citations
+A partir d'un set de works_id, trouver tous les articles qui les citent, et ceux par qui ils sont cités.
+Sortir les tableaux des non-doublons avec les infos suivantes:
+id, title, display_name, authorships, abstracts, doi, publication_date, cited_by (test), type, pdf_url, funders, is_oa, language, oa_url, source_display_name, source_id
+
 
 ## 7. Mise à jour du snapshot
 
